@@ -49,7 +49,7 @@ export default {
     }, this);
     this.mapObject = L.marker(this.latLng, options);
     L.DomEvent.on(this.mapObject, this.$listeners);
-    this.mapObject.on('move', this.latLngSync;
+    this.mapObject.on('move', this.latLngSync);
     propsBinder(this, this.mapObject, this.$options.props);
     this.parentContainer = findRealParent(this.$parent);
     this.parentContainer.addLayer(this, !this.visible);
