@@ -6,27 +6,6 @@ import { optionsMerger } from '../utils/optionsUtils.js';
 import Layer from '../mixins/Layer.js';
 import Options from '../mixins/Options.js';
 
-const throttle = (func, limit) => {
-  let lastFunc
-  let lastRan
-  return function() {
-    const context = this
-    const args = arguments
-    if (!lastRan) {
-      func.apply(context, args)
-      lastRan = Date.now()
-    } else {
-      clearTimeout(lastFunc)
-      lastFunc = setTimeout(function() {
-        if ((Date.now() - lastRan) >= limit) {
-          func.apply(context, args)
-          lastRan = Date.now()
-        }
-      }, limit - (Date.now() - lastRan))
-    }
-  }
-}
-
 export default {
   name: 'LMarker',
   mixins: [Layer, Options],
@@ -70,7 +49,7 @@ export default {
     }, this);
     this.mapObject = L.marker(this.latLng, options);
     L.DomEvent.on(this.mapObject, this.$listeners);
-    this.mapObject.on('move', throttle(this.latLngSync,100);
+    this.mapObject.on('move', this.latLngSync;
     propsBinder(this, this.mapObject, this.$options.props);
     this.parentContainer = findRealParent(this.$parent);
     this.parentContainer.addLayer(this, !this.visible);
